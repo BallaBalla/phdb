@@ -2,7 +2,6 @@
 // Php low-(no)Database Libary
 // No Real DB, just some Datamanagement in Files.
 
-//Convert a normal String to HEX-String
 function phdb_convert_todb($STRING){
 	$hexadecimal = '';
 	for ($i = 0; $i < strlen($STRING); $i++) {
@@ -12,7 +11,6 @@ function phdb_convert_todb($STRING){
 	}
 	return $hexadecimal;
 }
-//Convert a HEX-String to normal String
 function phdb_convert_todb($HEX){
 	$ascii='';
 	$HEX=str_replace(" ", "", $HEX);
@@ -21,5 +19,21 @@ function phdb_convert_todb($HEX){
 	}
 	return($ascii);
 }
-
+function phdb_use($DB,$PATH){
+	global $PHDB_DATABASE_PATH;
+	if(!isset($PATH)){
+		$PATH=".";
+	}
+	$i=0;
+	while($PATH[$i]){
+		$i++;
+	}$i--;
+	if($PATH[$i]!="/"){
+		$PATH.="/";
+	}
+	if(!is_dir($PATH.$DB)){
+		mkdir($PATH.$DB);
+	}
+	$PHDB_DATABASE_PATH=$PATH.$DB;
+}
 ?>
